@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Container Queries</title>
+    <style>
+        /* CSS Variables for theming */
+        :root {
+            /* Brand color palette */
+            --brand-red: #CC194D;
+            --brand-brown: #7A5948;
+            --brand-orange: #DC4419;
+            --brand-yellow: #DEB72C;
+            --brand-green: #44A543;
+            --brand-blue: #1296E6;
+            --brand-white: #FFFFFF;
+            --brand-black: #000000;
+            
+            /* Component-specific variables */
+            --wrapper-min-height: 200px;
+            --wrapper-min-width: 200px;
+            --wrapper-outline-color: var(--brand-blue);
+            --wrapper-padding: 10px;
+            --wrapper-background: transparent;
+            
+            /* Typography */
+            --font-stack: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            --h1-base-size: 16px;
+            --h1-medium-size: 24px;
+            --h1-large-size: 32px;
+            --body-size: 16px;
+            --body-line-height: 1.6;
+            
+            /* Container query breakpoints */
+            --breakpoint-medium: 200px;
+            --breakpoint-large: 300px;
+            
+            /* Colors for responsive states */
+            --h1-base-color: var(--brand-white);
+            --h1-medium-color: var(--brand-blue);
+            --h1-large-color: var(--brand-green);
+            --text-color: #E5E5E5;
+        }
+
+        /* Base styles */
+        *,
+        *::before,
+        *::after {
+            box-sizing: inherit;
+        }
+
+        html {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #353535;
+            font-family: var(--font-stack);
+            color: var(--text-color);
+        }
+
+        /* Component styles using CSS variables */
+        .resizable-wrapper {
+            resize: both;
+            overflow: auto;
+            min-height: var(--wrapper-min-height);
+            min-width: var(--wrapper-min-width);
+            outline: 2px dashed var(--wrapper-outline-color);
+            padding: var(--wrapper-padding);
+            background-color: var(--wrapper-background);
+        }
+
+        .content {
+            container-type: size;
+            container-name: box;
+            height: 100%;
+        }
+
+        .content-box {
+            height: 100%;
+        }
+
+        .content-box h1 {
+            font-size: var(--h1-base-size);
+            color: var(--h1-base-color);
+            font-weight: 700;
+            margin: 0 0 16px 0;
+            transition: font-size 0.3s ease-out, color 0.3s ease-out;
+        }
+
+        .content-box p {
+            font-size: var(--body-size);
+            line-height: var(--body-line-height);
+            margin: 0;
+        }
+
+        /* Container queries */
+        @container box (height > 200px) {
+            .content-box h1 {
+                font-size: var(--h1-medium-size);
+                color: var(--h1-medium-color);
+            }
+        }
+
+        @container box (height > 300px) {
+            .content-box h1 {
+                font-size: var(--h1-large-size);
+                color: var(--h1-large-color);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="resizable-wrapper">
+        <div class="content">
+            <div class="content-box">
+                <h1>Hello</h1>
+                <p>A paragraph Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

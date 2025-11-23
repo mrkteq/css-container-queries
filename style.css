@@ -1,0 +1,47 @@
+/* Reset the box-model */
+div {
+  box-sizing: border-box;
+}
+
+/* Pass down the box-sizing property */
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+/* Outer resizable wrapper */
+.resizable-wrapper {
+  resize: both;
+  overflow: auto;
+  min-height: 200px;
+  min-width: 200px;
+  outline: 2px dashed blue;
+  padding: 10px;
+}
+
+/* Inner container with container queries */
+.content {
+  container-type: size;
+  container-name: box;
+  height: 100%;
+}
+
+.content-box h1 {
+  font-size: 16px;
+}
+
+@container box (height > 200px) {
+  .content-box h1 {
+    font-size: 24px;
+    color: blue;
+  }
+}
+
+@container box (height > 300px) {
+  .content-box h1 {
+    font-size: 32px;
+    color: green;
+  }
+}
+
